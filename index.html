@@ -60,15 +60,6 @@
         let guessCount = 1;
         let resetButton;
 
-        <div class="resultParas">
-          <p class="guesses"></p>
-          <p class="lastResult"></p>
-          <p class="lowOrHi"></p>
-        </div>
-
-        <label for="guessField">Enter a guess: </label><input type="text" id="guessField" class="guessField">
-        <input type="submit" value="Submit guess" class="guessSubmit">
-
         function checkGuess() {
           let userGuess = Number(guessField.value);
           if (guessCount === 1) {
@@ -133,6 +124,14 @@
         }
 
         </script>
+        <div class="resultParas">
+          <p class="guesses"></p>
+          <p class="lastResult"></p>
+          <p class="lowOrHi"></p>
+        </div>
+
+        <label for="guessField">Enter a guess: </label><input type="text" id="guessField" class="guessField">
+        <input type="submit" value="Submit guess" class="guessSubmit">
       </guessinggame>
     </javascript>
     <about id="about">
