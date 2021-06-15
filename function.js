@@ -14,6 +14,13 @@ const guessField = document.querySelector('.guessField');
 
 let guessCount = 1;
 let resetButton;
+guessField.focus();
+
+<div class="resultParas">
+  <p class="guesses"></p>
+  <p class="lastResult"></p>
+  <p class="lowOrHi"></p>
+</div>
 
 function checkGuess() {
   let userGuess = Number(guessField.value);
@@ -40,12 +47,12 @@ function checkGuess() {
     }
   }
 
-  guessField.focus();
-
   guessCount++;
   guessField.value = '';
   guessField.focus();
 }
+
+
 
 guessSubmit.addEventListener('click', checkGuess);
 
