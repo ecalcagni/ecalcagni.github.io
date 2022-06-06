@@ -1,80 +1,119 @@
-function changeColor(newColor) {
-  var elem = document.getElementById('para');
-  elem.style.color = newColor;
+let value = 0
+let personCount = 0
+let i = 0
+let smileCount = 0
+
+let people = [];
+
+
+
+document.getElementById("black").onclick=()=>{document.getElementById("para1").style.color="black"}
+document.getElementById("red").onclick=()=>{document.getElementById("para1").style.color="red"}
+document.getElementById("green").onclick=()=>{document.getElementById("para1").style.color="green"}
+document.getElementById("blue").onclick=()=>{document.getElementById("para1").style.color="blue"}
+
+function addOne(){
+    value++;
+    document.getElementById("changing").innerHTML = value
 }
 
-let randomNumber = Math.floor(Math.random() * 100) + 1;
+function update(){
+    let userVal = document.getElementById("numInput").value
+    value = userVal
+    document.getElementById("changing").innerHTML = value
+}
 
-const guesses = document.querySelector('.guesses');
-const lastResult = document.querySelector('.lastResult');
-const lowOrHi = document.querySelector('.lowOrHi');
+document.getElementById("addButton").onclick=addOne
 
-const guessSubmit = document.querySelector('.guessSubmit');
-const guessField = document.querySelector('.guessField');
+document.getElementById("subInput").onclick=update
 
-let guessCount = 1;
-let resetButton;
-guessField.focus();
-
-
-function checkGuess() {
-  let userGuess = Number(guessField.value);
-  if (guessCount === 1) {
-    guesses.textContent = 'Previous guesses: ';
-  }
-  guesses.textContent += userGuess + ' ';
-
-  if (userGuess === randomNumber) {
-    lastResult.textContent = 'Congratulations! You got it right!';
-    lastResult.style.backgroundColor = 'green';
-    lowOrHi.textContent = '';
-    setGameOver();
-  } else if (guessCount === 10) {
-    lastResult.textContent = '!!!GAME OVER!!!';
-    setGameOver();
-  } else {
-    lastResult.textContent = 'Wrong!';
-    lastResult.style.backgroundColor = 'red';
-    if(userGuess < randomNumber) {
-      lowOrHi.textContent = 'Last guess was too low!';
-    } else if(userGuess > randomNumber) {
-      lowOrHi.textContent = 'Last guess was too high!';
+function countInstances()
+{
+    let counter = 0
+    let desiredVal = document.getElementById("instances").value
+    for (i = 0; i < value.length; i++)
+    {
+        if (value.substring(i,i+desiredVal.length) == desiredVal)
+        {
+            counter++
+        }
     }
-  }
+    document.getElementById("instanceCounter").innerHTML = "Number of Instances: " + counter
+}
 
-  guessCount++;
-  guessField.value = '';
-  guessField.focus();
+document.getElementById("instInput").onclick=countInstances
+
+class Person {
+    constructor(name, height)
+    {
+        this.name = name
+        this.height = height
+        personCount++
+    }
+    population()
+    {
+        console.log(personCount)
+    }
+    info()
+    {
+        return this.name + " " + this.height
+    }
 }
 
 
+document.getElementById("person").onclick=createPerson
 
-guessSubmit.addEventListener('click', checkGuess);
-
-function setGameOver() {
-  guessField.disabled = true;
-  guessSubmit.disabled = true;
-  resetButton = document.createElement('button');
-  resetButton.textContent = 'Start new game';
-  document.body.append(resetButton);
-  resetButton.addEventListener('click', resetGame);
+function getName(){
+    return document.getElementById("name").value
 }
 
-function resetGame() {
-  guessCount = 1;
+function getHeight(){
+    return document.getElementById("height").value
+}
 
-  const resetParas = document.querySelectorAll('.resultParas p');
-  for (let i = 0 ; i < resetParas.length ; i++) {
-    resetParas[i].textContent = '';
-  }
+function createPerson(){
+    let name = getName()
+    let height = getHeight()
+    let person = new Person(name, height);
+    people.push(person);
+    document.getElementById("pplList").innerHTML += people[i].info() + ", "
+    i++
+    document.getElementById("pop").innerHTML = "Population: " + personCount
+}
 
-  resetButton.parentNode.removeChild(resetButton);
+function buySmiley()
+{
+    if (value > 9)
+    {
+        value -= 10
+        document.getElementById("smiles").innerHTML += " :) "
+        smileCount++
+    }
+    /*
+    else
+    {
+        document.getElementById("changing").innerHTML = "Cannot Afford Smiley"
+    }
+    */
+    document.getElementById("changing").innerHTML = value
+}
 
-  guessField.disabled = false;
-  guessSubmit.disabled = false;
-  guessField.value = '';
-  guessField.focus();
 
-  lastResult.style.backgroundColor = 'white';
+document.getElementById("secret").onclick=()=>{setInterval(addOne, 100), value -= 100}
 
-  randomNumber = Math.floor(Math.random() * 100) + 1;
+document.getElementById("autobuy").onclick=()=>{setInterval(buySmiley, 100)}
+
+document.getElementById("crash").onclick=()=>{while(true){value++}}
+
+document.getElementById("addSmile").onclick=buySmiley
+
+
+// document.getElementById("reset").onclick=resetAll
+
+// function resetAll()
+// {
+//     clearInterval(addInterval)
+//     clearInterval(smileInterval)
+// }
+
+// document.getElementById("theme").onclick=()=>{document.querySelectorAll("#body").style.backg="white"}

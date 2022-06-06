@@ -1,0 +1,14 @@
+body{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto Flex', sans-serif;
+}
+
+#main{
+    background-color: #6885ed;
+}
+
+/* button{
+    height: 30px;
+    width: 80px;
+} */
